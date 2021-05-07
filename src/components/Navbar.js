@@ -1,19 +1,30 @@
-import React from 'react'
-import {Link} from "react-router-dom" 
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Accent } from '../styled/Random';
+import {
+    StyledNavbar,
+    StyledNavBrand,
+    StyledNavItems,
+    StyledLink,
+} from '../styled/Navbar';
 
 export default function NavBar() {
     return (
-        <nav>
-            <div>
+        <StyledNavbar>
+            <StyledNavBrand>
                 {/* link allows us to switch to the page linked without refreshing the whole reactapp */}
                 <Link to="/">
-                    Learn.Build.<span>Type.</span>
+                    Learn.Build.<Accent>Type.</Accent>
                 </Link>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/highScores">highScores</Link></li>
-                </ul>
-            </div>
-        </nav>
-    )
+            </StyledNavBrand>
+            <StyledNavItems>
+                <li>
+                    <StyledLink to="/">Home</StyledLink>
+                </li>
+                <li>
+                    <StyledLink to="/highScores">highScores</StyledLink>
+                </li>
+            </StyledNavItems>
+        </StyledNavbar>
+    );
 }
