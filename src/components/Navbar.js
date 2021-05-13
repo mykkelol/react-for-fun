@@ -22,7 +22,7 @@ export default function NavBar() {
                     <StyledLink to="/">Home</StyledLink>
                 </li>
                 <li>
-                    <StyledLink to="/highScores">highScores</StyledLink>
+                    <StyledLink to="/highScores">High Scores</StyledLink>
                 </li>
             </StyledNavItems>
         </StyledNavbar>
