@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Strong } from '../styled/Random.js';
 import {
     StyledGame,
@@ -11,12 +11,15 @@ export default function Game({ history }) {
     // useState is react hook that returns an array of two objects
     // we can use destructuring to access said objects and leverage them
     // 'score' is the store of value and 'setScore' is the function to update/set said store of value
+    const MAX_SECONDS = 10;
+    const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    const [currentCharacter, setCurrentCharacter] = useState('');
     const [score, setScore] = useState(0);
-    const MAX_SECONDS = 5;
     const [ms, setMs] = useState(0);
     const [seconds, setSeconds] = useState(MAX_SECONDS);
 
     useEffect(() => {
+        setRandomCharacter();
         const currentTime = new Date();
         const intervalId = setInterval(() => updateTime(currentTime), 1);
         return () => {
@@ -57,6 +60,39 @@ export default function Game({ history }) {
         }
     }, [seconds, ms, history]);
 
+    const keyUpHandler = useCallback(
+        (e) => {
+            if (e.key === currentCharacter) {
+                setScore((prevScore) => prevScore + 1);
+            } else {
+                if (score > 0) {
+                    setScore((prevScore) => prevScore - 1);
+                }
+            }
+            // by using the following useState setter in an annoynmous function like the underlying
+            // will not work -- we'd need to use it in a preexisting react hook or use the useCallback hook
+            // useCallback hook accepts dependencies array of values it'd listen to recalculate the function it's embedded in
+            // here, setRandomCharacter sets our dependency and useCallback will listen to the dependency and recalculates the underlying function,
+            // returning it the "memoized" value (the new value that was set and cached), allowing the underlying function to use the new memoized value that was set
+            setRandomCharacter();
+        },
+        [currentCharacter]
+    );
+
+    useEffect(() => {
+        document.addEventListener('keyup', keyUpHandler);
+        return () => {
+            document.removeEventListener('keyup', keyUpHandler);
+        };
+        // everytime keyUpHandler changes (which it does every time currentCharacter changes), re-register the dependency, keyUpHandler
+        // without this, it won't re-register keyUpHandler and our callback isn't called on next keyup to perform the validation, setScore, etc.
+    }, [keyUpHandler]);
+
+    const setRandomCharacter = () => {
+        const randomInt = Math.floor(Math.random() * 36);
+        setCurrentCharacter(characters[randomInt]);
+    };
+
     // useEffect is react hook that allows us to execute a block of code when a specific dependency changes
     // useEffect accepts an array of dependencies for it to execute on, in this case, we have 'score'
     // useEffect allows us to make a 'clean-up function' return to clean up our entire
@@ -76,7 +112,7 @@ export default function Game({ history }) {
             <StyledScore>
                 Score: <strong>{score}</strong>
             </StyledScore>
-            <StyledChar>A</StyledChar>
+            <StyledChar>{currentCharacter}</StyledChar>
             <StyledTimer>
                 Time:{' '}
                 <Strong>
