@@ -7,7 +7,7 @@ export default function Home() {
     // how functional component works is we simply return what we want to display
     return (
         <div>
-            <StyledTitle>Ready to Type?</StyledTitle>
+            <StyledTitle>Ready to Type?!</StyledTitle>
             <CTA to="/game">
                 Click or type <Accent>'s'</Accent> to start playing
             </CTA>
