@@ -1,0 +1,3 @@
+[build]
+    publish = "/builld"
+    command = "CI= npm run build"
