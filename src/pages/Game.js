@@ -6,6 +6,7 @@ import {
     StyledTimer,
     StyledChar,
 } from '../styled/Game.js';
+import { useScore } from '../contexts/ScoreContext.js';
 
 export default function Game({ history }) {
     // useState is react hook that returns an array of two objects
@@ -14,12 +15,15 @@ export default function Game({ history }) {
     const MAX_SECONDS = 10;
     const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
     const [currentCharacter, setCurrentCharacter] = useState('');
-    const [score, setScore] = useState(0);
+    // with React Context API, we can remove the following line and useScore, a hook we've created directly
+    //const [score, setScore] = useState(0);
+    const [score, setScore] = useScore(0);
     const [ms, setMs] = useState(0);
     const [seconds, setSeconds] = useState(MAX_SECONDS);
 
     useEffect(() => {
         setRandomCharacter();
+        setScore(0);
         const currentTime = new Date();
         const intervalId = setInterval(() => updateTime(currentTime), 1);
         return () => {
