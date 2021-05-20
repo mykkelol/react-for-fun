@@ -10,7 +10,7 @@ export const StyledNavbar = styled.nav`
 
 export const StyledNavBrand = styled.div`
     font-size: 1.4rem;
-
+    text-align: left;
     // following code is SASS-like and reads as all a tag that are children of the underlying element
     & > a {
         text-decoration: none;

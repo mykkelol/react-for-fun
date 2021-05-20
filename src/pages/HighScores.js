@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ScoreLI, ScoresList } from '../styled/HighScores';
+import { StyledTitle } from '../styled/Random.js';
 
 export default function HighScores() {
     // cache the scores with hook
@@ -21,9 +22,9 @@ export default function HighScores() {
     // display scores
     return (
         <div>
-            <h1>High Scores</h1>
+            <StyledTitle>High Scores</StyledTitle>
             <ScoresList>
-                {highScores.map((score) => {
+                {highScores.map((score, index) => {
                     return (
                         <ScoreLI key={score.id}>
                             {score.fields.name} - {score.fields.score}
