@@ -9,8 +9,13 @@ import Navbar from './components/Navbar';
 import Global from './styled/Global';
 import { Main } from './styled/Main';
 import { Container } from './styled/Container';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function App() {
+    const { loading } = useAuth0();
+    if (loading) {
+        return <p>Loading...</p>;
+    }
     return (
         // initialize router
         <Router>

@@ -1,4 +1,5 @@
 -   React (hooks, contexts, & all the schenanigans)
 -   Netlify (serverless functions, env vars, hosting, CICD)
 -   Airtable API (as db alternative)
--   npms (react, airtable, dotenv, netlify, auth0)
+-   Auth0
+-   npms (react, styled-components, dotenv, netlify, airtable, auth0-react)

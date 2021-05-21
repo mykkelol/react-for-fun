@@ -3,14 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import config from './auth_config.json';
 import { ScoreProvider } from './contexts/ScoreContext';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 ReactDOM.render(
-    <React.StrictMode>
-        <ScoreProvider>
-            <App />
-        </ScoreProvider>
-    </React.StrictMode>,
+    // Auth0 clientId is public, no masking needed
+    <Auth0Provider
+        domain={config.domain}
+        clientId={config.clientId}
+        redirectUri={window.location.origin}
+    >
+        <React.StrictMode>
+            <ScoreProvider>
+                <App />
+            </ScoreProvider>
+        </React.StrictMode>
+    </Auth0Provider>,
     document.getElementById('root')
 );
 
