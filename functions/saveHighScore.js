@@ -1,6 +1,22 @@
 const { table, getHighScores } = require('./utils/airtable');
+const {
+    getAccessTokenFromHeaders,
+    validateAccessToken,
+} = require('./utils/auth');
 
 exports.handler = async (event) => {
+    const token = getAccessTokenFromHeaders(event.headers);
+    const user = await validateAccessToken(token);
+    // if bad JWT token (or lack thereof) from auth0
+    if (!user) {
+        return {
+            statusCode: 401,
+            body: JSON.stringify({
+                err: 'User is not logged in or unauthorized.',
+            }),
+        };
+    }
+
     if (event.httpMethod != 'POST') {
         return {
             statusCode: 405,
@@ -10,7 +26,8 @@ exports.handler = async (event) => {
         };
     }
 
-    const { name, score } = JSON.parse(event.body);
+    const { score } = JSON.parse(event.body);
+    const name = user['https://learnbuildtype/username'];
     if (!name || typeof score === 'undefined') {
         return {
             statusCode: 400,

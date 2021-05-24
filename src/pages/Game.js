@@ -12,7 +12,7 @@ export default function Game({ history }) {
     // useState is react hook that returns an array of two objects
     // we can use destructuring to access said objects and leverage them
     // 'score' is the store of value and 'setScore' is the function to update/set said store of value
-    const MAX_SECONDS = 10;
+    const MAX_SECONDS = 5;
     const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
     const [currentCharacter, setCurrentCharacter] = useState('');
     // with React Context API, we can remove the following line and useScore, a hook we've created directly

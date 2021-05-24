@@ -8,18 +8,18 @@ import { ScoreProvider } from './contexts/ScoreContext';
 import { Auth0Provider } from '@auth0/auth0-react';
 
 ReactDOM.render(
-    // Auth0 clientId is public, no masking needed
-    <Auth0Provider
-        domain={config.domain}
-        clientId={config.clientId}
-        redirectUri={window.location.origin}
-    >
-        <React.StrictMode>
+    <React.StrictMode>
+        <Auth0Provider
+            domain={config.domain}
+            clientId={config.clientId}
+            redirectUri={window.location.origin}
+            audience={config.audience}
+        >
             <ScoreProvider>
                 <App />
             </ScoreProvider>
-        </React.StrictMode>
-    </Auth0Provider>,
+        </Auth0Provider>
+    </React.StrictMode>,
     document.getElementById('root')
 );
 

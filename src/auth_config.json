@@ -1,4 +1,5 @@
 {
     "domain": "learn-build-type-mjs.us.auth0.com",
-    "clientId": "tiiRGklNf9ZgaVc4nvt61KApAjIGBVK8"
+    "clientId": "tiiRGklNf9ZgaVc4nvt61KApAjIGBVK8",
+    "audience": "https://learnbuildtypemjsapi"
 }
