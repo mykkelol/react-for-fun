@@ -30,5 +30,5 @@ export const StyledChar = styled.p`
     // in html on the StyledGame element, which is the parent div wrapper)
     grid-column: 1/4;
     text-align: center;
-    color: #e16365;
+    color: var(--accent-color);
 `;

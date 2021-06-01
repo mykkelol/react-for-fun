@@ -9,7 +9,7 @@ import {
 } from '../styled/Navbar';
 import { useAuth0 } from '@auth0/auth0-react';
 
-export default function NavBar() {
+export default function NavBar({ toggleTheme }) {
     const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
     return (
         <StyledNavbar>
@@ -36,6 +36,7 @@ export default function NavBar() {
                         <button onClick={logout}>Logout</button>
                     </li>
                 )}
+                <button onClick={toggleTheme}>Toggle Theme</button>
             </StyledNavItems>
         </StyledNavbar>
     );
