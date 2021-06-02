@@ -7,6 +7,7 @@ import {
     StyledNavItems,
     StyledLink,
 } from '../styled/Navbar';
+import { StyledButton } from '../styled/Button';
 import { useAuth0 } from '@auth0/auth0-react';
 
 export default function NavBar({ toggleTheme }) {
@@ -28,15 +29,17 @@ export default function NavBar({ toggleTheme }) {
                 </li>
                 {!isAuthenticated && (
                     <li>
-                        <button onClick={loginWithRedirect}>Login</button>
+                        <StyledLink onClick={loginWithRedirect}>
+                            Login
+                        </StyledLink>
                     </li>
                 )}
                 {isAuthenticated && (
                     <li>
-                        <button onClick={logout}>Logout</button>
+                        <StyledLink onClick={logout}>Logout</StyledLink>
                     </li>
                 )}
-                <button onClick={toggleTheme}>Toggle Theme</button>
+                <StyledButton onClick={toggleTheme}>Toggle Theme</StyledButton>
             </StyledNavItems>
         </StyledNavbar>
     );
